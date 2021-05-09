@@ -7,10 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.descolab.bacadulucom.R
 import com.descolab.bacadulucom.detailArticle.detailArticleActivity
+import com.descolab.bacadulucom.helper.Utils
 import com.descolab.bacadulucom.listSources.listSourcesActivity
+import com.descolab.bacadulucom.search.SearchActivity
 import com.descolab.bacadulucom.service.response.ArticlesItem
 import com.descolab.bacadulucom.service.response.Category
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -20,7 +23,6 @@ class HomeFragment : Fragment(),CategoryAdapter.ListCategoryListener,TopHeadline
     private var mActionListener: HomePresenter? = null
     private var mAdapter: TopHeadlineAdapter? = null
     private var mAdapterCategoryAdapter: CategoryAdapter? = null
-    val dataCategory: ArrayList<Category> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +42,28 @@ class HomeFragment : Fragment(),CategoryAdapter.ListCategoryListener,TopHeadline
         mActionListener?.loadTopHeadline()
         setupRvCategory()
         setData()
+
+        searchView.onActionViewExpanded()
+        searchView.clearFocus()
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean { //Log.e("onQueryTextChange", "==called");
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean { // Do something
+                if(!query.isNullOrEmpty()) {
+                    val dIntent = Intent(activity, SearchActivity::class.java)
+                    dIntent.putExtra("keyword", query)
+                    activity?.startActivity(dIntent)
+                    searchView.setQuery("", false)
+                    searchView.clearFocus()
+                }else{
+                    context?.let { Utils.showToast(it, getString(R.string.must_filled)) }
+                }
+                return false
+            }
+        })
+
     }
     private fun setData() {
         val data = arrayListOf(

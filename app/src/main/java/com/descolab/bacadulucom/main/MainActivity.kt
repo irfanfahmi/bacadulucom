@@ -1,18 +1,23 @@
 package com.descolab.bacadulucom.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.descolab.bacadulucom.App
 import com.descolab.bacadulucom.R
 import com.descolab.bacadulucom.category.CategoryFrag
 import com.descolab.bacadulucom.helper.Utils
+import com.descolab.bacadulucom.helper.Utils.Companion.showToast
 import com.descolab.bacadulucom.home.HomeFragment
 import com.descolab.bacadulucom.profile.ProfileFrag
+import com.descolab.bacadulucom.search.SearchActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,6 +51,9 @@ class MainActivity : AppCompatActivity() {
         // Set toolbar title/app title
         actionBar!!.title = ""
 
+        // Display the app icon in action bar/toolbar
+        actionBar.setDisplayShowHomeEnabled(true)
+        actionBar.setDisplayUseLogoEnabled(true)
 
         navigation.enableShiftingMode(false)
         navigation.enableItemShiftingMode(false)
@@ -124,4 +132,8 @@ class MainActivity : AppCompatActivity() {
             navigation.visibility = View.GONE
         }
     }
+
+
+
+
 }
