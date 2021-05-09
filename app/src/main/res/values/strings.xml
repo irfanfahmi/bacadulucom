@@ -8,6 +8,7 @@
     <string name="iv_gambar">ivGambar</string>
     <string name="top_headline">Top Headline</string>
     <string name="sources">Sources</string>
+    <string name="news_article">News Article</string>
 
     <string name="business">Business</string>
     <string name="entertainment">Entertainment</string>
@@ -16,6 +17,9 @@
     <string name="science">Science</string>
     <string name="sports">Sports</string>
     <string name="technology">Technology</string>
+
+    <string name="no_sources">There are no news or articles with these sources.</string>
+    <string name="error_API">Unsuccessful Connection!</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

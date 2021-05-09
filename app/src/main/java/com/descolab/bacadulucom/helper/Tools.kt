@@ -12,6 +12,8 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.BitmapImageViewTarget
+import com.descolab.bacadulucom.R
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,11 +53,26 @@ class Tools {
             try {
                 Glide.with(ctx).load(url)
                     .crossFade()
+                    .placeholder(R.drawable.ic_placeholder)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(img)
             } catch (e: Exception) {
             }
 
+        }
+
+        @JvmStatic
+        fun getCreatedDate(data: String): String {
+
+            val formattedDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+            val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+            try {
+                sdf.format(formattedDate.parse(data)).toString()
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+
+            return sdf.format(formattedDate.parse(data)).toString()
         }
 
         @JvmStatic

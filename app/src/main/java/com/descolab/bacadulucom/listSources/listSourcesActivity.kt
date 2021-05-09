@@ -1,12 +1,14 @@
 package com.descolab.bacadulucom.listSources
 
 import android.app.ProgressDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.descolab.bacadulucom.R
 import com.descolab.bacadulucom.home.CategoryAdapter
+import com.descolab.bacadulucom.listArticle.listArticleActivity
 import com.descolab.bacadulucom.service.response.SourcesItem
 import kotlinx.android.synthetic.main.activity_list_sources.*
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -21,7 +23,6 @@ class listSourcesActivity : AppCompatActivity(),listSourcesContract.View,listSou
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_sources)
         val category :String? = intent.getStringExtra("category")
-        Log.d("Cek","category "+category)
         progressDialog = ProgressDialog(this)
         progressDialog?.setMessage("Loading...")
         progressDialog?.setCancelable(false)
@@ -44,6 +45,8 @@ class listSourcesActivity : AppCompatActivity(),listSourcesContract.View,listSou
     }
 
     override fun toNewsArticle(item: SourcesItem) {
-
+        val i = Intent(this, listArticleActivity::class.java)
+        i.putExtra("sources",item.name.toString())
+        this.startActivity(i)
     }
 }

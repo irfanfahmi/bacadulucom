@@ -15,10 +15,15 @@ interface ApiService {
     @GET("top-headlines?country=id&apiKey=${BuildConfig.API_KEY}")
     fun getTopHeadline(): Call<ResponseArticle<ArrayList<ArticlesItem>>>
 
-    @GET("sources?apiKey=${BuildConfig.API_KEY}&")
+    @GET("sources?apiKey=${BuildConfig.API_KEY}")
     fun getSources(
         @QueryMap params: Map<String, String>
     ): Call<ResponseSources<ArrayList<SourcesItem>>>
+
+    @GET("everything?apiKey=${BuildConfig.API_KEY}")
+    fun getArticle(
+        @QueryMap params: Map<String, String>
+    ): Call<ResponseArticle<ArrayList<ArticlesItem>>>
 
 
 

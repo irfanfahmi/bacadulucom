@@ -1,4 +1,4 @@
-package com.descolab.bacadulucom.home
+package com.descolab.bacadulucom.listArticle
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,20 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.descolab.bacadulucom.R
 import com.descolab.bacadulucom.helper.Tools
 import com.descolab.bacadulucom.service.response.ArticlesItem
-import kotlinx.android.synthetic.main.item_top_headline.view.*
+import kotlinx.android.synthetic.main.item_list_article.view.*
 
-class TopHeadlineAdapter(private val mContext: Context,
+class listArticleAdapter(private val mContext: Context,
                          val mItems: ArrayList<ArticlesItem>,
-                         val listener: ListTopHeadlineListener) :
-    RecyclerView.Adapter<TopHeadlineAdapter.ViewHolder>() {
+                         val listener: ListArticleListener) :
+    RecyclerView.Adapter<listArticleAdapter.ViewHolder>() {
     private val mInflater: LayoutInflater
 
     init {
         mInflater = LayoutInflater.from(mContext)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopHeadlineAdapter.ViewHolder {
-        val view = mInflater.inflate(R.layout.item_top_headline, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): listArticleAdapter.ViewHolder {
+        val view = mInflater.inflate(R.layout.item_list_article, parent, false)
         return ViewHolder(view)
     }
 
@@ -30,7 +30,7 @@ class TopHeadlineAdapter(private val mContext: Context,
         //return 5
     }
 
-    override fun onBindViewHolder(holder: TopHeadlineAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: listArticleAdapter.ViewHolder, position: Int) {
         if (0 <= position && position < mItems.size) {
             val data = mItems[position]
             // Bind your data here
@@ -41,22 +41,19 @@ class TopHeadlineAdapter(private val mContext: Context,
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(data: ArticlesItem) {
             itemView.tvTitle.text = data.title.toString()
-            itemView.tvDate.text =  Tools.getCreatedDate(data.publishedAt.toString())
-            if (data.author.toString().isNullOrEmpty())
-                itemView.tvAuthor.text = ""
-            else
-                itemView.tvAuthor.text = data.author.toString()
+            itemView.tvDate.text = Tools.getCreatedDate(data.publishedAt.toString())
+            itemView.tvAuthor.text = data.author.toString()
 
             itemView.ivGambar?.let{
                 Tools.displayImageOriginal(mContext,it,data.urlToImage.toString())
             }
 
             itemView.setOnClickListener {
-                listener.toDetailTopHeadline(data)
+                listener.toDetailArticle(data)
             }
         }
     }
-    interface ListTopHeadlineListener {
-        fun toDetailTopHeadline(item: ArticlesItem)
+    interface ListArticleListener {
+        fun toDetailArticle(item: ArticlesItem)
     }
 }
