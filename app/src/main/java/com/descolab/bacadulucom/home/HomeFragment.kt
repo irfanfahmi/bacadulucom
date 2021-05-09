@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.descolab.bacadulucom.R
+import com.descolab.bacadulucom.detailArticle.detailArticleActivity
 import com.descolab.bacadulucom.listSources.listSourcesActivity
 import com.descolab.bacadulucom.service.response.ArticlesItem
 import com.descolab.bacadulucom.service.response.Category
@@ -79,6 +80,9 @@ class HomeFragment : Fragment(),CategoryAdapter.ListCategoryListener,TopHeadline
     }
 
     override fun toDetailTopHeadline(item: ArticlesItem) {
+        val i = Intent(this.context, detailArticleActivity::class.java)
+        i.putExtra("url",item.url.toString())
+        this.startActivity(i)
     }
 
     override fun toDetailCategory(item: Category) {

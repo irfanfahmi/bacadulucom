@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.descolab.bacadulucom.R
+import com.descolab.bacadulucom.detailArticle.detailArticleActivity
 import com.descolab.bacadulucom.listSources.listSourcesActivity
 import com.descolab.bacadulucom.listSources.listSourcesAdapter
 import com.descolab.bacadulucom.listSources.listSourcesPresenter
@@ -59,6 +60,8 @@ class listArticleActivity : AppCompatActivity(),listArticleContract.View,listArt
     }
 
     override fun toDetailArticle(item: ArticlesItem) {
-
+        val i = Intent(this, detailArticleActivity::class.java)
+        i.putExtra("url",item.url.toString())
+        this.startActivity(i)
     }
 }

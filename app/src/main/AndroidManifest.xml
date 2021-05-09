@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.bacadulucom">
-        <activity android:name=".listArticle.listArticleActivity"></activity>
+        <activity android:name=".detailArticle.detailArticleActivity"></activity>
+        <activity android:name=".listArticle.listArticleActivity" />
         <activity android:name=".listSources.listSourcesActivity" />
         <activity android:name=".main.MainActivity">
             <intent-filter>

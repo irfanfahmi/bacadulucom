@@ -20,6 +20,7 @@
 
     <string name="no_sources">There are no news or articles with these sources.</string>
     <string name="error_API">Unsuccessful Connection!</string>
+    <string name="url_notfound">URL Not Found!</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
