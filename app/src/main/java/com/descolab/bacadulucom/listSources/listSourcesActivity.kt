@@ -1,0 +1,49 @@
+package com.descolab.bacadulucom.listSources
+
+import android.app.ProgressDialog
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.descolab.bacadulucom.R
+import com.descolab.bacadulucom.home.CategoryAdapter
+import com.descolab.bacadulucom.service.response.SourcesItem
+import kotlinx.android.synthetic.main.activity_list_sources.*
+import kotlinx.android.synthetic.main.fragment_home.*
+
+class listSourcesActivity : AppCompatActivity(),listSourcesContract.View,listSourcesAdapter.ListSourcesListener {
+    private var mActionListener: listSourcesPresenter? = null
+    private var progressDialog : ProgressDialog? = null
+    private var mAdapterlistSourcesAdapter: listSourcesAdapter? = null
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_list_sources)
+        val category :String? = intent.getStringExtra("category")
+        Log.d("Cek","category "+category)
+        progressDialog = ProgressDialog(this)
+        progressDialog?.setMessage("Loading...")
+        progressDialog?.setCancelable(false)
+        mActionListener = listSourcesPresenter( this,this)
+        if (category != null) {
+            mActionListener?.loadListSources(category)
+        }
+    }
+
+    override fun showListSources(data: ArrayList<SourcesItem>) {
+        mAdapterlistSourcesAdapter = listSourcesAdapter(this,data,this)
+        rvListSources?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvListSources?.setHasFixedSize(true)
+        rvListSources?.adapter = mAdapterlistSourcesAdapter
+    }
+
+    override fun showProgressDialog(show: Boolean) {
+        if (show) progressDialog?.show()
+        else progressDialog?.dismiss()
+    }
+
+    override fun toNewsArticle(item: SourcesItem) {
+
+    }
+}

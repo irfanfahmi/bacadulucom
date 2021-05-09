@@ -1,6 +1,7 @@
 package com.descolab.bacadulucom.home
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.descolab.bacadulucom.R
+import com.descolab.bacadulucom.listSources.listSourcesActivity
 import com.descolab.bacadulucom.service.response.ArticlesItem
 import com.descolab.bacadulucom.service.response.Category
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -80,6 +82,9 @@ class HomeFragment : Fragment(),CategoryAdapter.ListCategoryListener,TopHeadline
     }
 
     override fun toDetailCategory(item: Category) {
+        val i = Intent(this.context, listSourcesActivity::class.java)
+        i.putExtra("category",item.id.toString())
+        this.startActivity(i)
     }
 
 

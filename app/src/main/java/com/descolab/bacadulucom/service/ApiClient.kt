@@ -17,8 +17,6 @@ class ApiClient {
 
         @JvmStatic
         val BASE_URL = "https://newsapi.org/v2/"
-        @JvmStatic
-        val URL_API = BASE_URL + "api/"
 
         @JvmStatic
         fun getClient(): Retrofit {
